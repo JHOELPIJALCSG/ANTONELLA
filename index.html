@@ -64,4 +64,44 @@ button {
 }
 
 .yes:hover {
-    transform: scale(1.
+    transform: scale(1.1);
+    background: #ff3385;
+}
+
+.no {
+    background: white;
+    color: #ff0066;
+}
+
+.no:hover {
+    transform: scale(1.1);
+}
+
+/* CORAZONES */
+.heart {
+    position: absolute;
+    bottom: -100px;
+    font-size: 40px;
+    animation: floatUp 8s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>ANTONELLA 💖</h1>
+    <p>¿Te gustaría ser mi San Valentín? 💌</p>
+
+    <div cla
