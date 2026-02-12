@@ -101,12 +101,26 @@ button {
     <p>¿Te gustaría ser mi San Valentín? 💌</p>
 
     <div class="buttons">
-        <button class="yes">SI QUIERO 💍</button>
-        <button class="no">NO GRACIAS 🙈</button>
+<button class="yes" onclick="aceptar()">SI QUIERO 💍</button>
+<button class="no" onmouseover="mover()">NO GRACIAS 🙈</button>
     </div>
 </div>
 
 <script>
+function aceptar() {
+    document.querySelector(".card").innerHTML = `
+        <h1>💖 Sabía que dirías que sí 💖</h1>
+        <p>Ahora oficialmente eres mi San Valentín 😍</p>
+    `;
+}
+
+function mover() {
+    const btn = document.querySelector(".no");
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 300 - 150;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -125,3 +139,4 @@ setInterval(createHeart, 500);
 
 </body>
 </html>
+
