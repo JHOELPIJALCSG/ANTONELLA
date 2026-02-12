@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antonella 💖</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:'Comic Sans MS', cursive;
+    background:linear-gradient(135deg,#ff9acb,#ff4da6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    color:white;
+}
+
+.container{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    padding:40px;
+    border-radius:30px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.3);
+    position:relative;
+    max-width:350px;
+}
+
+.nombre{
+    font-size:32px;
+    font-weight:bold;
+    text-shadow:2px 2px 10px rgba(255,0,128,0.8);
+}
+
+h1{
+    font-size:24px;
+}
+
+button{
+    padding:15px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#ff1493;
+    color:white;
+}
+
+#yesBtn:hover{
+    transform:scale(1.1);
+}
+
+#noBtn{
+    background:#ffd6eb;
+    color:#ff1493;
+    position:absolute;
+}
+
+.message{
+    margin-top:20px;
+    font-size:20px;
+    display:none;
+    animation:fadeIn 1s forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.heart{
+    position:absolute;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);opacity:1;}
+    to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="nombre">ANTONELLA 💖</div>
+    <h1>¿Te gustaría ser mi San Valentín? 💌</h1>
+
+    <button id="yesBtn">SI QUIERO 💍</button>
+    <button id="noBtn">NO GRACIAS 🙈</button>
+
+    <div class="message" id="loveMessage">
+        💕 Antonella, desde hoy eres oficialmente mi San Valentín 💕<br><br>
+        Prometo llenarte de besos, abrazos y hacerte muy feliz 🥰💖
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const message = document.getElementById("loveMessage");
+
+noBtn.addEventListener("mouseover", function(){
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 100);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+yesBtn.addEventListener("click", function(){
+    message.style.display="block";
+    createHeartRain();
+});
+
+function createFloatingHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*25+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createFloatingHeart,500);
+
+function createHeartRain(){
+    for(let i=0;i<60;i++){
+        setTimeout(createFloatingHeart,i*80);
+    }
+}
+</script>
+
+</body>
+</html>
