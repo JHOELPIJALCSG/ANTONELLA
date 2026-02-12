@@ -6,53 +6,72 @@
 <title>Antonella 💖</title>
 
 <style>
-body{
+*{
     margin:0;
     padding:0;
-    overflow:hidden;
-    font-family:'Comic Sans MS', cursive;
-    background:linear-gradient(135deg,#ff9acb,#ff4da6);
+    box-sizing:border-box;
+    font-family:'Segoe UI', cursive;
+}
+
+body{
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    text-align:center;
-    color:white;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow:hidden;
 }
 
+/* CONTENEDOR */
 .container{
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(12px);
-    padding:40px;
+    background:white;
+    padding:50px 40px;
     border-radius:30px;
-    box-shadow:0 10px 35px rgba(0,0,0,0.3);
+    text-align:center;
+    width:90%;
+    max-width:420px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
     position:relative;
-    max-width:350px;
+    z-index:2;
 }
 
 .nombre{
     font-size:32px;
     font-weight:bold;
-    text-shadow:2px 2px 10px rgba(255,0,128,0.8);
+    color:#ff3f8e;
+    margin-bottom:15px;
 }
 
 h1{
-    font-size:24px;
+    font-size:22px;
+    margin-bottom:30px;
+    color:#444;
+}
+
+/* BOTONES */
+.buttons{
+    position:relative;
+    height:120px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
 }
 
 button{
-    padding:15px 25px;
-    font-size:18px;
+    padding:20px 35px;
+    font-size:20px;
+    font-weight:bold;
     border:none;
-    border-radius:25px;
+    border-radius:40px;
     cursor:pointer;
-    margin:10px;
     transition:0.3s;
 }
 
 #yesBtn{
-    background:#ff1493;
+    background:#ff3f8e;
     color:white;
+    box-shadow:0 8px 20px rgba(255,63,142,0.4);
 }
 
 #yesBtn:hover{
@@ -60,16 +79,17 @@ button{
 }
 
 #noBtn{
-    background:#ffd6eb;
-    color:#ff1493;
+    background:#ffd1e8;
+    color:#ff3f8e;
     position:absolute;
 }
 
 .message{
-    margin-top:20px;
+    margin-top:25px;
     font-size:20px;
+    color:#ff3f8e;
     display:none;
-    animation:fadeIn 1s forwards;
+    animation:fadeIn 1s ease forwards;
 }
 
 @keyframes fadeIn{
@@ -77,14 +97,49 @@ button{
     to{opacity:1;}
 }
 
+/* CORAZONES ANIMADOS */
 .heart{
     position:absolute;
-    animation:float 6s linear infinite;
+    width:30px;
+    height:30px;
+    background:linear-gradient(45deg,#ff3f8e,#ff758c);
+    transform:rotate(45deg);
+    animation:float 8s linear infinite;
+    opacity:0.7;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:30px;
+    height:30px;
+    background:inherit;
+    border-radius:50%;
+}
+
+.heart::before{
+    top:-15px;
+    left:0;
+}
+
+.heart::after{
+    left:-15px;
+    top:0;
 }
 
 @keyframes float{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh);opacity:0;}
+    0%{
+        transform:translateY(100vh) rotate(45deg);
+        opacity:0;
+    }
+    20%{
+        opacity:0.8;
+    }
+    100%{
+        transform:translateY(-10vh) rotate(45deg);
+        opacity:0;
+    }
 }
 </style>
 </head>
@@ -93,14 +148,15 @@ button{
 
 <div class="container">
     <div class="nombre">ANTONELLA 💖</div>
-    <h1>¿Te gustaría ser mi San Valentín? 💌</h1>
+    <h1>¿Te gustaría ser mi San Valentín?</h1>
 
-    <button id="yesBtn">SI QUIERO 💍</button>
-    <button id="noBtn">NO GRACIAS 🙈</button>
+    <div class="buttons">
+        <button id="yesBtn">💍 SI QUIERO</button>
+        <button id="noBtn">🙈 NO GRACIAS</button>
+    </div>
 
     <div class="message" id="loveMessage">
-        💕 Antonella, desde hoy eres oficialmente mi San Valentín 💕<br><br>
-        Prometo llenarte de besos, abrazos y hacerte muy feliz 🥰💖
+        💕 Desde hoy eres oficialmente mi San Valentín 💕
     </div>
 </div>
 
@@ -108,35 +164,41 @@ button{
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const message = document.getElementById("loveMessage");
+const container = document.querySelector(".buttons");
 
+/* BOTÓN NO se mueve dentro del contenedor */
 noBtn.addEventListener("mouseover", function(){
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 100);
+    const maxX = container.clientWidth - noBtn.clientWidth;
+    const maxY = container.clientHeight - noBtn.clientHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 });
 
+/* Cuando dice SI */
 yesBtn.addEventListener("click", function(){
     message.style.display="block";
-    createHeartRain();
 });
 
-function createFloatingHeart(){
-    const heart=document.createElement("div");
+/* Corazones de fondo más profesionales */
+function createHeart(){
+    const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML="💖";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*25+15)+"px";
-    document.body.appendChild(heart);
-    setTimeout(()=>{heart.remove();},6000);
-}
-setInterval(createFloatingHeart,500);
 
-function createHeartRain(){
-    for(let i=0;i<60;i++){
-        setTimeout(createFloatingHeart,i*80);
-    }
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.width = (Math.random()*30+20)+"px";
+    heart.style.height = heart.style.width;
+    heart.style.animationDuration = (Math.random()*5+5)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},8000);
 }
+
+setInterval(createHeart,400);
 </script>
 
 </body>
