@@ -6,200 +6,62 @@
 <title>Antonella 💖</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', cursive;
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff6fa5, #ff2e88);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    overflow:hidden;
+/* Tarjeta central */
+.card {
+    background: #ff8fbc;
+    padding: 50px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
 }
 
-/* CONTENEDOR */
-.container{
-    background:white;
-    padding:50px 40px;
-    border-radius:30px;
-    text-align:center;
-    width:90%;
-    max-width:420px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.2);
-    position:relative;
-    z-index:2;
+h1 {
+    font-size: 40px;
+    color: white;
+    margin-bottom: 10px;
 }
 
-.nombre{
-    font-size:32px;
-    font-weight:bold;
-    color:#ff3f8e;
-    margin-bottom:15px;
+p {
+    font-size: 22px;
+    color: white;
 }
 
-h1{
-    font-size:22px;
-    margin-bottom:30px;
-    color:#444;
+/* CONTENEDOR DE BOTONES */
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
 
-/* BOTONES */
-.buttons{
-    position:relative;
-    height:120px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
+/* BOTONES GRANDES */
+button {
+    padding: 20px 50px;
+    font-size: 20px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
 }
 
-button{
-    padding:20px 35px;
-    font-size:20px;
-    font-weight:bold;
-    border:none;
-    border-radius:40px;
-    cursor:pointer;
-    transition:0.3s;
+.yes {
+    background: #ff0066;
+    color: white;
 }
 
-#yesBtn{
-    background:#ff3f8e;
-    color:white;
-    box-shadow:0 8px 20px rgba(255,63,142,0.4);
-}
-
-#yesBtn:hover{
-    transform:scale(1.1);
-}
-
-#noBtn{
-    background:#ffd1e8;
-    color:#ff3f8e;
-    position:absolute;
-}
-
-.message{
-    margin-top:25px;
-    font-size:20px;
-    color:#ff3f8e;
-    display:none;
-    animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-/* CORAZONES ANIMADOS */
-.heart{
-    position:absolute;
-    width:30px;
-    height:30px;
-    background:linear-gradient(45deg,#ff3f8e,#ff758c);
-    transform:rotate(45deg);
-    animation:float 8s linear infinite;
-    opacity:0.7;
-}
-
-.heart::before,
-.heart::after{
-    content:"";
-    position:absolute;
-    width:30px;
-    height:30px;
-    background:inherit;
-    border-radius:50%;
-}
-
-.heart::before{
-    top:-15px;
-    left:0;
-}
-
-.heart::after{
-    left:-15px;
-    top:0;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh) rotate(45deg);
-        opacity:0;
-    }
-    20%{
-        opacity:0.8;
-    }
-    100%{
-        transform:translateY(-10vh) rotate(45deg);
-        opacity:0;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-    <div class="nombre">ANTONELLA 💖</div>
-    <h1>¿Te gustaría ser mi San Valentín?</h1>
-
-    <div class="buttons">
-        <button id="yesBtn">💍 SI QUIERO</button>
-        <button id="noBtn">🙈 NO GRACIAS</button>
-    </div>
-
-    <div class="message" id="loveMessage">
-        💕 Desde hoy eres oficialmente mi San Valentín 💕
-    </div>
-</div>
-
-<script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("loveMessage");
-const container = document.querySelector(".buttons");
-
-/* BOTÓN NO se mueve dentro del contenedor */
-noBtn.addEventListener("mouseover", function(){
-    const maxX = container.clientWidth - noBtn.clientWidth;
-    const maxY = container.clientHeight - noBtn.clientHeight;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
-
-/* Cuando dice SI */
-yesBtn.addEventListener("click", function(){
-    message.style.display="block";
-});
-
-/* Corazones de fondo más profesionales */
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.width = (Math.random()*30+20)+"px";
-    heart.style.height = heart.style.width;
-    heart.style.animationDuration = (Math.random()*5+5)+"s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{heart.remove();},8000);
-}
-
-setInterval(createHeart,400);
-</script>
-
-</body>
-</html>
+.yes:hover {
+    transform: scale(1.
